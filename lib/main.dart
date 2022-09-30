@@ -55,38 +55,57 @@ class _MyHomePageState extends State<MyHomePage> {
           Icon(Icons.settings)
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8),
-              color: Colors.green,
-              height: 180,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      'Pot',
-                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 50),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.green,
+                  height: 180,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          'Pot',
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 50),
+                        ),
+                        Text(
+                          '$_counter',
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        const Icon(
+                          Icons.paid,
+                          size: 50,
+                          color: Colors.yellow,
+                        )
+                      ],
                     ),
-                    Text(
-                      '$_counter',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    const Icon(
-                      Icons.paid,
-                      size: 50,
-                      color: Colors.yellow,
-                    )
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            decoration: BoxDecoration(border: Border.all(
+              color: Colors.red, width: 8.0
+            )),
+              child: Row(
+                children: [
+                  TextButton(onPressed: () { }, child: Text("click!"))
+                ],
+              )
+          ),
+          Positioned(
+            bottom: 0.0,
+            child: TextButton(onPressed: () {}, child: Text('click!'),)
+          )
+        ],
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
@@ -103,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ),
           FloatingActionButton(
-              onPressed: _add100ToCounter,
+              onPressed: _add200ToCounter,
               heroTag: "add200",
               backgroundColor: Colors.yellow,
               child: Row(
