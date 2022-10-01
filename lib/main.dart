@@ -30,17 +30,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _pot = 0;
+  int _stack = 5000;
 
-  void _add100ToCounter() {
+  void _bet(int amount) {
     setState(() {
-      _counter += 100;
-    });
-  }
-
-  void _add200ToCounter() {
-    setState(() {
-      _counter += 200;
+      _pot += amount;
+      _stack -= amount;
     });
   }
 
@@ -55,79 +51,84 @@ class _MyHomePageState extends State<MyHomePage> {
           Icon(Icons.settings)
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8),
-              color: Colors.green,
-              height: 180,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      'Pot',
-                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 50),
-                    ),
-                    Text(
-                      '$_counter',
-                      style: Theme.of(context).textTheme.headline4,
-                    ),
-                    const Icon(
-                      Icons.paid,
-                      size: 50,
-                      color: Colors.yellow,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
+      body: Column(
         children: <Widget>[
-          FloatingActionButton(
-            onPressed: _add100ToCounter,
-            heroTag: "add100",
-            backgroundColor: Colors.yellow,
-            child: Row(
-              children: const <Widget>[
-                Icon(Icons.add, color: Colors.black,),
-                Text('100', style: TextStyle(color: Colors.black),)
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.green,
+                  height: 180,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          'Pot',
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 50),
+                        ),
+                        Text(
+                          '$_pot',
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        const Icon(
+                          Icons.paid,
+                          size: 50,
+                          color: Colors.yellow,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ),
-          FloatingActionButton(
-              onPressed: _add100ToCounter,
-              heroTag: "add200",
-              backgroundColor: Colors.yellow,
-              child: Row(
-                children: const <Widget>[
-                  Icon(Icons.add, color: Colors.black,),
-                  Text(
-                    '200',
-                    style: TextStyle(color: Colors.black),
-                  )
+          OutlinedButton(onPressed: () {},
+              child: const Text("Call")
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(onPressed: () => _bet(100),
+                  child: const Text("Bet 100", style: TextStyle(color: Colors.yellow))
+              ),
+              OutlinedButton(onPressed: () => _bet(200),
+                  child: const Text("Bet 200", style: TextStyle(color: Colors.yellow))
+              ),
+              OutlinedButton(onPressed: () => _bet(300),
+                  child: const Text("Bet 300", style: TextStyle(color: Colors.yellow))
+              ),
+              OutlinedButton(onPressed: () => _bet(400),
+                  child: const Text("Bet 400", style: TextStyle(color: Colors.yellow))
+              ),
+            ],
+          ),
+          OutlinedButton(onPressed: () => _bet(_stack),
+              child: const Text("All In", style: TextStyle(color: Colors.purple))
+          ),
+          OutlinedButton(onPressed: () {},
+              child: const Text("Fold", style: TextStyle(color: Colors.red))
+          ),
+          Container(
+            width: 200,
+            decoration: BoxDecoration(
+              border: Border.all()
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  const Text('Stack'),
+                  Text('$_stack')
                 ],
               ),
-          ),
+            ),
+          )
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _add100ToCounter,
-      //   tooltip: 'Increment',
-      //   child: Row(
-      //     children: const <Widget>[
-      //       Icon(Icons.add),
-      //       Text('100')
-      //     ],
-      //   )
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
